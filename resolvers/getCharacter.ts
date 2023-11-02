@@ -34,7 +34,6 @@ const getCharacter = async (req: Request, res: Response) => {
         return episodeData.name; // transforma url en nombre del episode
       })
     );
-
     /*
     const episodeCharacters = await Promise.all(
         character.episode.map(async (url_episode: string) => {
@@ -77,8 +76,10 @@ const getCharacter = async (req: Request, res: Response) => {
           return;
         }
     
+        const episode = episodes;
+        
         // Caso contrario, crea un nuevo cliente y lo guarda en la base de datos.
-        const newClient = new CharacterFromAPIModel({ name, episode: episodes });
+        const newClient = new CharacterFromAPIModel({ name, episode });
         await newClient.save();
     
         // Responde con los datos del nuevo cliente.
