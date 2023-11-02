@@ -32,9 +32,32 @@ const getCharacter = async (req: Request, res: Response) => {
       })
     );
 
+    const episodeCharacters = await Promise.all(
+        character.episode.map(async (url_episode: string) => {
+          const response = await fetch(url_episode); // Consultar a la url / api externa ("http//episode_rick_morty")
+          // Comprobar estado !==200 (correcto) -> throw error en caso de fallo
+          if (response.status !== 200) {
+            throw new Error(`Episode ${url_episode} not found`);
+          }
+          const episodeData = await response.json(); // Cargar datos todos datos del json en una variable 
+          const epi = await Promise.all(
+            episodeData.characters.map(async (url_character: string) => {
+                const response = await fetch(url_character);
+                if (response.status !== 200) {
+                    throw new Error(`Episode ${url_character} not found`);
+                }
+                const characterJSON = await response.json(); // Cargar datos todos datos del json en una variable 
+                return characterJSON.name;
+            })
+          )
+          return epi;
+        })
+      );
+
     res.send({
-      name: character.name,
-      episodes,
+        name: character.name, 
+        episodes, 
+        episodeCharacters
     });
 
   } catch (error) {
