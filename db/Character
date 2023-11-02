@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const characterFromAPISchema = new Schema(
   {
     name: { type: String, required: true },
-    episode: { type: [String], required: true, default: 0 },
+    episode: { type: [String], required: true},
   },
 );
 
