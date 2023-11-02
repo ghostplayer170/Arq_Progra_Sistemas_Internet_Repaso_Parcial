@@ -19,7 +19,7 @@ const getCharacter = async (req: Request, res: Response) => {
     // Crear objeto Character con datos JSON
     const character: CharacterFromAPI = await response.json();
 
-    const name = character.name;
+    const name = character.name; //[Nombre: Rick]
 
     // Obtener episodios a patir de un array strings
     //["https...","https..."] -> ["jungla","pepinillo rick"]
@@ -78,13 +78,13 @@ const getCharacter = async (req: Request, res: Response) => {
         }
     
         // Caso contrario, crea un nuevo cliente y lo guarda en la base de datos.
-        const newClient = new CharacterFromAPIModel({ name, episodes });
+        const newClient = new CharacterFromAPIModel({ name, episode: episodes });
         await newClient.save();
     
         // Responde con los datos del nuevo cliente.
         res.status(200).send({
           name: newClient.name,
-          episodes: episodes,
+          episodes: newClient.episode,
         });
 
   } catch (error) {
