@@ -84,7 +84,7 @@ const getCharacter = async (req: Request, res: Response) => {
         // Responde con los datos del nuevo cliente.
         res.status(200).send({
           name: newClient.name,
-          episodes: newClient.episodes,
+          episodes: episodes,
         });
 
   } catch (error) {
