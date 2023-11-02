@@ -28,7 +28,7 @@ const getCharacter = async (req: Request, res: Response) => {
           throw new Error(`Episode ${episode} not found`);
         }
         const episodeData = await response.json(); // Cargar datos todos datos del json en una variable 
-        return episodeData.name , episodeData.characters; // transforma url en nombre del episode
+        return episodeData.name; // transforma url en nombre del episode
       })
     );
 
