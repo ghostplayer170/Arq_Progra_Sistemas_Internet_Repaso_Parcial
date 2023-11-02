@@ -6,4 +6,5 @@ export type Character = {
 export type CharacterFromAPI = {
     name: string;
     episode: string[];
+    episodeCharacters: string[];
 };
