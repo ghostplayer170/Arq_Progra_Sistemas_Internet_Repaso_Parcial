@@ -1,6 +1,7 @@
 //@ts-ignore
 import { Request, Response } from "npm:express@4.18.2";
 import { CharacterFromAPI } from "../types.ts";
+import CharacterFromAPIModel from "../db/Character";
 
 const getCharacter = async (req: Request, res: Response) => {
   try {
@@ -18,6 +19,8 @@ const getCharacter = async (req: Request, res: Response) => {
     // Crear objeto Character con datos JSON
     const character: CharacterFromAPI = await response.json();
 
+    const name = character.name;
+
     // Obtener episodios a patir de un array strings
     //["https...","https..."] -> ["jungla","pepinillo rick"]
     const episodes = await Promise.all(
@@ -32,6 +35,7 @@ const getCharacter = async (req: Request, res: Response) => {
       })
     );
 
+    /*
     const episodeCharacters = await Promise.all(
         character.episode.map(async (url_episode: string) => {
           const response = await fetch(url_episode); // Consultar a la url / api externa ("http//episode_rick_morty")
@@ -55,16 +59,39 @@ const getCharacter = async (req: Request, res: Response) => {
         })
       );
 
-    res.send({
-        name: character.name, 
-        episodes, 
-        episodeCharacters
-    });
+    */
+        // Obtiene el name y cif del cuerpo de la solicitud.
+        // const { name, cif } = req.body;
+    
+        // Verifica si el name o el cif están ausentes en la solicitud.
+         if (!name || !episodes) {
+          res.status(400).send("Name and episodes are required");
+          return;
+        }
+    
+        // Verifica si ya existe un cliente con el mismo cif en la base de datos.
+        const alreadyExists = await CharacterFromAPIModel.findOne({ name }).exec();
+    
+        if (alreadyExists) {
+          res.status(400).send("Client already exists");
+          return;
+        }
+    
+        // Caso contrario, crea un nuevo cliente y lo guarda en la base de datos.
+        const newClient = new CharacterFromAPIModel({ name, episodes });
+        await newClient.save();
+    
+        // Responde con los datos del nuevo cliente.
+        res.status(200).send({
+          name: newClient.name,
+          episodes: newClient.episodes,
+        });
 
   } catch (error) {
     res.status(404).send(error.message);
     return;
   }
 };
+
 
 export default getCharacter;
