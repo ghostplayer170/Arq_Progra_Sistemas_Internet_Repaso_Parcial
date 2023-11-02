@@ -1,4 +1,4 @@
-//@ts-ignore
+
 import { Request, Response } from "npm:express@4.18.2";
 import { CharacterFromAPI } from "../types.ts";
 import CharacterFromAPIModel from "../db/Character";
