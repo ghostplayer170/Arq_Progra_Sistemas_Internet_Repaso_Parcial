@@ -1,7 +1,7 @@
 
 import { Request, Response } from "npm:express@4.18.2";
 import { CharacterFromAPI } from "../types.ts";
-import CharacterFromAPIModel from "../db/Character";
+import CharacterFromAPIModel from "../db/Character.ts";
 
 const getCharacter = async (req: Request, res: Response) => {
   try {
