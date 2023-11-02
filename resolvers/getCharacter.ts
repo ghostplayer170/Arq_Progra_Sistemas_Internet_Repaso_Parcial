@@ -1,7 +1,7 @@
 
 import { Request, Response } from "npm:express@4.18.2";
 import { CharacterFromAPI } from "../types.ts";
-import CharacterFromAPIModel from "../db/Character.ts";
+import CharacterFromAPIModel from "../db/character.ts";
 
 const getCharacter = async (req: Request, res: Response) => {
   try {
@@ -59,6 +59,9 @@ const getCharacter = async (req: Request, res: Response) => {
       );
 
     */
+
+        // ************************* ADD BBDD ****************************
+
         // Obtiene el name y cif del cuerpo de la solicitud.
         // const { name, cif } = req.body;
     
@@ -77,6 +80,7 @@ const getCharacter = async (req: Request, res: Response) => {
         }
     
         const episode = episodes;
+        
         
         // Caso contrario, crea un nuevo cliente y lo guarda en la base de datos.
         const newClient = new CharacterFromAPIModel({ name, episode });
