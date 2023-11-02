@@ -42,9 +42,10 @@ const getCharacter = async (req: Request, res: Response) => {
           const episodeData = await response.json(); // Cargar datos todos datos del json en una variable 
           const epi = await Promise.all(
             episodeData.characters.map(async (url_character: string) => {
+                console.log(url_character)
                 const response = await fetch(url_character);
                 if (response.status !== 200) {
-                    throw new Error(`Episode ${url_character} not found`);
+                    throw new Error(`Character ${url_character} not found`); //No encontro
                 }
                 const characterJSON = await response.json(); // Cargar datos todos datos del json en una variable 
                 return characterJSON.name;
