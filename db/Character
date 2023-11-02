@@ -1,0 +1,19 @@
+import mongoose from "npm:mongoose@7.6.3";
+import { CharacterFromAPI } from "../types.ts";
+
+// Nuevo esquema de mongoose.
+const Schema = mongoose.Schema;
+
+// Se define esquema de characterFromAPIe con dos propiedades: 'name' y 'cif'. 
+const characterFromAPISchema = new Schema(
+  {
+    name: { type: String, required: true },
+    episodes: { type: [String], required: true },
+  },
+);
+
+// Se crea un tipo 'CharacterFromAPIModelType' de tipo 'mongoose.Document' y 'CharacterFromAPI' excluyendo la propiedad 'id'.
+export type CharacterFromAPIModelType = mongoose.Document & Omit<CharacterFromAPI, "id">;
+
+// Se exporta el modelo de mongoose, asociándolo al esquema definido 'characterFromAPISchema' y al tipo de documento 'CharacterFromAPIModelType'.
+export default mongoose.model<CharacterFromAPIModelType>("CharacterFromAPI", characterFromAPISchema);
