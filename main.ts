@@ -5,7 +5,7 @@ import mongoose from "npm:mongoose@7.6.3";
 
 import getCharacter from "./resolvers/getCharacter.ts";
 import deleteCharacter from "./resolvers/deleteCharacter.ts";
-
+import getInfo from "./resolvers/getInfo.ts";
 
 // Importación de función 'load' de Deno para cargar variables de entorno.
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
@@ -39,6 +39,7 @@ app
   .get("/",(req: Request, res: Response) => { res.status(200).send("API RICK Y MORTY"); })
   .get("/Characters/:id", getCharacter)
   .delete("/deleteCharacter/:id", deleteCharacter)
+  .get("/info", getInfo)
 
 
   // Iniciar el servidor.
