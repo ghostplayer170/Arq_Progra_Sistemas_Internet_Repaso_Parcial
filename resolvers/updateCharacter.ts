@@ -11,7 +11,7 @@ const updateCharacter = async (req: Request, res: Response) => {
     }
 
     const updatedCharacter = await CharacterFromAPIModel.findOneAndUpdate(
-      { id },
+      { _id: id },
       { name },
       { new: true }
     ).exec();
