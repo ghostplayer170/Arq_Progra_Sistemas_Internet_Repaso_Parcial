@@ -1,5 +1,5 @@
 import { Request, Response } from "npm:express@4.18.2";
-import CharacterFromAPIModel from "../db/Character.ts";
+import CharacterFromAPIModel from "../db/character.ts";
 
 // Esta función maneja una solicitud para eliminar un cliente.
 const deleteCharacter = async (req: Request, res: Response) => {
@@ -8,7 +8,7 @@ const deleteCharacter = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     // Busca y elimina el cliente con el CIF otorgado.
-    const Character = await CharacterFromAPIModel.findOneAndDelete({ name: id }).exec();
+    const Character = await CharacterFromAPIModel.findOneAndDelete({ _id: id }).exec();
 
     // Si no encuentra cliente.
     if (!Character) {
