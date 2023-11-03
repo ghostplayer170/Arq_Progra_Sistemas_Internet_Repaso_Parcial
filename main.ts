@@ -6,6 +6,7 @@ import mongoose from "npm:mongoose@7.6.3";
 import getCharacter from "./resolvers/getCharacter.ts";
 import deleteCharacter from "./resolvers/deleteCharacter.ts";
 import getInfo from "./resolvers/getInfo.ts";
+import updateCharacter from "./resolvers/updateCharacter.ts"
 
 // Importación de función 'load' de Deno para cargar variables de entorno.
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
@@ -40,6 +41,7 @@ app
   .get("/Characters/:id", getCharacter)
   .delete("/deleteCharacter/:id", deleteCharacter)
   .get("/info", getInfo)
+  .put("/updateCharacter/:id", updateCharacter)
 
 
   // Iniciar el servidor.
