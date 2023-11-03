@@ -1,5 +1,5 @@
 import { Request, Response } from "npm:express@4.18.2";
-import CharacterFromAPIModel from "../db/character.ts";
+import CharacterFromAPIModel from "../db/Character.ts";
 
 // Esta función maneja una solicitud para eliminar un cliente.
 const deleteCharacter = async (req: Request, res: Response) => {
