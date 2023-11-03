@@ -11,9 +11,12 @@ const updateCharacter = async (req: Request, res: Response) => {
     }
 
     const updatedCharacter = await CharacterFromAPIModel.findOneAndUpdate(
-      { _id: id },
-      { name },
-      { new: true }
+    // Buscamos un registro con `_id` igual a `id`
+    { _id: id },
+    // Actualizamos el campo `name` con el nuevo valor
+    { name },
+    // Opciones adicionales, en este caso `new: true` indica que queremos obtener el documento actualizado
+    { new: true }
     ).exec();
 
     if (!updatedCharacter) {
